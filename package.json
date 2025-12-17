@@ -1,0 +1,28 @@
+{
+  "name": "backend-course-2025-6",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node main.js -- -h localhost -p 3000 -c ./cache",
+    "dev": "nodemon main.js -- -h localhost -p 3000 -c ./cache"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "commander": "^14.0.2",
+    "express": "^5.2.1",
+    "multer": "^2.0.2",
+    "superagent": "^10.2.3",
+    "swagger": "^0.7.5",
+    "swagger-ui-express": "^5.0.1",
+    "yaml": "^2.8.2",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
+}

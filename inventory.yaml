@@ -1,0 +1,188 @@
+openapi: 3.0.3
+info:
+  title: Inventory API
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000
+
+paths:
+
+  /inventory:
+    get:
+      summary: Get all inventory items
+      responses:
+        "200":
+          description: List of items
+
+  /register:
+    post:
+      summary: Register a new inventory item
+      description: Create a new inventory entry with optional photo
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                inventory_name:
+                  type: string
+                  example: Телефон iPhone 12
+                description:
+                  type: string
+                  example: Дуже хороший телефон
+                photo:
+                  type: string
+                  format: binary
+      responses:
+        "201":
+          description: Successfully created
+        "400":
+          description: Missing required fields
+
+  /inventory/{id}:
+    get:
+      summary: Get item by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Item found
+        "404":
+          description: Not found
+
+    put:
+      summary: Update inventory item by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Телефон Samsung A52
+                description:
+                  type: string
+                  example: Оновлений опис
+      responses:
+        "200":
+          description: Updated
+        "404":
+          description: Not found
+
+    delete:
+      summary: Delete inventory item by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Deleted
+        "404":
+          description: Not found
+
+  /inventory/{id}/photo:
+    get:
+      summary: Get item's photo by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Photo returned
+        "404":
+          description: Photo not found
+
+    put:
+      summary: Update item's photo by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                photo:
+                  type: string
+                  format: binary
+      responses:
+        "200":
+          description: Photo updated
+        "404":
+          description: Not found
+
+  /search:
+    post:
+      summary: Search item by ID
+      description: Search for an inventory item and optionally include photo link
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  example: "1763572098345"
+                has_photo:
+                  type: boolean
+                  example: true
+      responses:
+        "200":
+          description: Item found
+        "404":
+          description: Not found
+
+  /RegisterForm.html:
+    get:
+      summary: Registration form page
+      responses:
+        "200":
+          description: HTML form returned
+
+  /SearchForm.html:
+    get:
+      summary: Search form page
+      responses:
+        "200":
+          description: HTML form returned
+
+components:
+  schemas:
+    InventoryItem:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "1763572098345"
+        name:
+          type: string
+        description:
+          type: string
+        photo:
+          type: string
