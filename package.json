@@ -2,11 +2,11 @@
   "name": "backend-course-2025-6",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node main.js -- -h localhost -p 3000 -c ./cache",
-    "dev": "nodemon main.js -- -h localhost -p 3000 -c ./cache"
+    "start": "node main.js -h 0.0.0.0 -p 3000 -c ./cache",
+    "dev": "nodemon main.js -h 0.0.0.0 -p 3000 -c ./cache"
   },
   "keywords": [],
   "author": "",
@@ -14,8 +14,10 @@
   "type": "commonjs",
   "dependencies": {
     "commander": "^14.0.2",
+    "dotenv": "^17.2.3",
     "express": "^5.2.1",
     "multer": "^2.0.2",
+    "mysql2": "^3.16.0",
     "superagent": "^10.2.3",
     "swagger": "^0.7.5",
     "swagger-ui-express": "^5.0.1",
